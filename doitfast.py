@@ -18,6 +18,7 @@ refiner.to("cuda")
 
 n_steps = 40
 high_noise_frac = 0.8
+
 # Define how many steps and what % of steps to be run on each experts (80/20) here
 n_steps = int(input("Enter the n_steps, now  – %i: " % (n_steps)) or n_steps)
 high_noise_frac = float(input("Enter the high noice frac, now  – %f: " % (high_noise_frac)) or high_noise_frac)
@@ -32,7 +33,13 @@ medium = input("\033[31m\033[47m2nd step\033[0m – The Medium is the material u
 style = input("\033[31m\033[47m3rd step\033[0m – The Style refers to the artistic style of the image. \
 \033[32m\033[47m#e.g.: impressionist, surrealist, pop art.\033[0m:")
 
-promt = subject + "," + medium + "," + style + "," + 
+resolution = input("\033[31m\033[47m3rd step\033[0m – The Resolution represents how sharp and detailed the image is. \
+\033[32m\033[47m#e.g.: highly detailed, sharp focus.\033[0m:")
+
+details = input("\033[31m\033[47m3rd step\033[0m – The Additional details are sweeteners added to modify an image. \
+\033[32m\033[47m#e.g.: [salvage: 0.4], sci-fi, [glasses: 0.8]\033[0m:")
+
+promt = subject + "," + medium + "," + style + "," + resolution + "," + details + "," + color + "," + lighting 
 
 num_repeat_steps = input("enter the required number of images: ")
 
