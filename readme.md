@@ -6,7 +6,12 @@ You need python3 and some libs for working.<br>
 ---<br>
 pip3 installs:<br>
 pip install diffusers --upgrade<br>
-pip install invisible_watermark transformers accelerate safetensors<br> 
+pip install invisible_watermark 
+transformers 
+accelerate 
+safetensors 
+opencv-python
+pathlib<br> 
 
 I used this [guide](https://stable-diffusion-art.com/prompt-guide/)
 to make my program. You probably need to read this before work 

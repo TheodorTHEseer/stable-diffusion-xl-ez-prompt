@@ -1,5 +1,11 @@
-from diffusers import DiffusionPipeline
 import torch
+import cv2
+import os
+from pathlib import Path
+from diffusers import DiffusionPipeline
+
+pictures_dir = Path(pathlib.Path.home(), "Pictures/")
+os.mkdir(str(pictures_dir)+"/generated_images")
 
 # load both base & refiner
 base = DiffusionPipeline.from_pretrained(
@@ -39,22 +45,26 @@ resolution = input("\033[31m\033[47m3rd step\033[0m – The Resolution represent
 details = input("\033[31m\033[47m3rd step\033[0m – The Additional details are sweeteners added to modify an image. \
 \033[32m\033[47m#e.g.: [salvage: 0.4], sci-fi, [glasses: 0.8]\033[0m:")
 
+color = input("\033[31m\033[47m3rd step\033[0m – The Color control the overall color of the image by adding color keywords. \
+\033[32m\033[47m#e.g.: (grey: 0.3), (red: 0.5), (black:0.2)\033[0m:")
+
+lighting = input("\033[31m\033[47m3rd step\033[0m – The Lighting keywords can have a huge effect on how the image looks. \
+\033[32m\033[47m#e.g.: cinematic lighting, dark\033[0m:")
 promt = subject + "," + medium + "," + style + "," + resolution + "," + details + "," + color + "," + lighting 
 
 num_repeat_steps = input("enter the required number of images: ")
 
-# run both experts
-image = base(
-    prompt=prompt,
-    num_inference_steps=n_steps,
-    denoising_end=high_noise_frac,
-    output_type="latent",
-).images
-image = refiner(
-    prompt=prompt,
-    num_inference_steps=n_steps,
-    denoising_start=high_noise_frac,
-    image=image,
-).images[0]
-
-show(image)
+for index in range(0, num_inference_steps):     
+    image = base(
+        prompt=prompt,
+        num_inference_steps=n_steps,
+        denoising_end=high_noise_frac,
+        output_type="latent",
+    ).images
+    image = refiner(
+        prompt=prompt,
+        num_inference_steps=n_steps,
+        denoising_start=high_noise_frac,
+        image=image,
+    ).images[0]
+    cv2.imwrite(str(pictures_dir)+"/generated_images/"+num_repeat_steps.png, image)    
