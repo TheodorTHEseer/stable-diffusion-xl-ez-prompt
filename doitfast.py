@@ -1,11 +1,6 @@
 from diffusers import DiffusionPipeline
 import torch
 
-#stdout for users
-print ("\033[31m\033[47mCheck ur py imports: diffusers, " )
-print ("#pip install diffusers --upgrade")
-print ("#pip install invisible_watermark transformers accelerate safetensors\033[0m")
-
 # load both base & refiner
 base = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
