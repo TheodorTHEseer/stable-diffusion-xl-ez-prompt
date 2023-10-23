@@ -16,19 +16,23 @@ refiner = DiffusionPipeline.from_pretrained(
 )
 refiner.to("cuda")
 
+n_steps = 40
+high_noise_frac = 0.8
 # Define how many steps and what % of steps to be run on each experts (80/20) here
-n_steps = int(input("Enter the n_steps, now  – 40: ") or "40")
-high_noise_frac = float(input("Enter the high noice frac, now  – 0.8: ") or "0.8")
+n_steps = int(input("Enter the n_steps, now  – %i: " % (n_steps)) or n_steps)
+high_noise_frac = float(input("Enter the high noice frac, now  – %f: " % (high_noise_frac)) or high_noise_frac)
 
 print ("Let's write ur promt...") 
 subject = input("\033[31m\033[47m1st step\033[0m – The subject is what you want to see in the image. \
 \033[32m\033[47m#e.g.: man with big axe, jumping, screaming, detailed face.\033[0m:")
 
-medium = input("\033[31m\033[47m2nd step\033[0m – Medium is the material used to make artwork. \
+medium = input("\033[31m\033[47m2nd step\033[0m – The Medium is the material used to make artwork. \
 \033[32m\033[47m#e.g.: illustration, oil painting, 3D rendering, and photography.\033[0m:")
 
+style = input("\033[31m\033[47m3rd step\033[0m – The Style refers to the artistic style of the image. \
+\033[32m\033[47m#e.g.: impressionist, surrealist, pop art.\033[0m:")
 
-promt = subject + medium + 
+promt = subject + "," + medium + "," + style + "," + 
 
 num_repeat_steps = input("enter the required number of images: ")
 
